@@ -1,0 +1,413 @@
+* {
+    color: #333;
+}
+body {
+    overflow-x: hidden;
+}
+body.before-load {
+    overflow: hidden;
+}
+.merri {
+    font-family: 'Merriweather', serif;
+}
+.noto {
+    font-family: 'Noto Serif KR', serif;
+}
+.none {
+    display: none;
+}
+a{
+    text-decoration: none;
+}
+.before-load .loading {
+    opacity: 1;
+}
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    background-color: white;
+    transition-duration: 0.5s;
+    opacity: 0;
+}
+.loading .loading-circle {
+    width: 54px;
+    height: 54px;
+    /* width와 height를 54px로 잡은 이유는 stroke가 그려질 때 원 가운데를 기준으로
+        안쪽과 바깥쪽으로 그려지기 때문임.
+        현재 stroke가 4로 되어 있는데 원 안에 안쪽 2px, 바깥쪽 2px씩 그려져 있어서
+        결론적으로는 바깥쪽 2px만 width와 height에 영향을 주기 때문에 54px로 지정했고
+        stroke가 width에 포함되어 있어서 실제 원은 50px인 것.(box-sizing개념) */
+    animation: loading-spin 3s infinite;
+}
+@keyframes loading-spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.loading .loading-circle circle {
+    stroke: black;
+    stroke-width: 4;
+/*  svg 속성으로 loading-circle을 만들어 줄건데 stroke-width에 단위를 정하지 않고 4로만 적은 이유는
+       나중에 svg에 주는 attr 중 viewBox에 따라서 크기가 변경될 수 있는 여지가 있기 때문이라고 함
+       (넣어도 크게 상관은 없음)
+       현재 svg에 viewBox를 54, 54로 주고 circle r(반지름)을 25로 줬는데
+       viewBox를 540, 540으로 바꾸면 원의 크기가 1/10으로 줄어듦 */
+       fill: transparent;
+       /* fill: svg 도형의 색을 결정 */
+       stroke-dasharray: 157;
+       /* 개발자도구로 값을 증가시켜 보면 157정도가 이 원의 둘레가 됨.
+          30으로 지정하면 157을 30씩 쪼개 그려넣고 있는 것
+            => line30 empty30 line30 empty30 line30 empty7
+          ! document.querySeletor('.loading-circle circle').getTotalLength로
+          ! 둘레를 구해올 수도 있음(156.06752858888672로 나옴) */
+        stroke-dashoffset: 0;
+        animation: loading-circle-ani 1s infinite;
+}   
+@keyframes loading-circle-ani {
+    0% {
+        stroke-dashoffset: 157;
+    }
+    75% {
+        stroke-dashoffset: -147;
+    }
+    100% {
+        stroke-dashoffset: -157;
+    }
+}
+.before-load .container {
+    display: none;
+}
+/* 홈페이지 중간에 새로고침을 하게 되면 load가 되기 전에 conatiner가 보이기 때문에
+    video가 안보이고 scroll 위치가 이상해져 오류가 생기는 걸 방지하기 위함 */
+.container {
+    overflow-x: hidden;
+}
+
+/* mobile */
+@media screen and (max-width: 767px) {
+    header {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 96%;
+        padding: 20px 2%;
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: saturate(180%) blur(15px);
+        -webkit-backdrop-filter: saturate(180%) blur(15px);
+        -moz-backdrop-filter: saturate(180%) blur(15px);
+        -o-backdrop-filter: saturate(180%) blur(15px);
+    }
+    #show-scene-2 header,
+    #show-scene-3 header {
+        z-index: 100;
+    }
+    header h1 {
+        margin-bottom: 15px;
+        background: url('../images/logo.png') no-repeat center / contain;
+        line-height: 20px;
+        text-indent: -9999px;
+    }
+    header > a{
+        display: block;
+        width: 80%;
+        font-size: 12px;
+        text-align: right;
+        margin-left: auto;
+        padding-right: 25px;
+        background: url('../images/icon_doubleArrow.png') no-repeat right center / 20px auto;
+    }
+    /* header */
+
+
+    footer {
+        padding: 35px 2%;
+        background-color: #fbf7f4;
+    }
+    footer form fieldset {
+        margin-bottom: 25px;
+    }
+    footer form fieldset label {
+        display: block;
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 15px;
+        line-height: 35px;
+    }
+    footer form fieldset input[type="email"],
+    footer form fieldset input[type="email"]::placeholder,
+    footer form fieldset input[type="submit"] {
+        font-size: 13px;
+    }
+    footer form fieldset input[type="email"] {
+        border: 1px solid #ddd;
+        background-color: transparent;
+        margin-left: 20px;
+        padding: 7px;
+        width: 60%;
+    }
+    footer form fieldset input[type="submit"] {
+        border: 1px solid #333;
+        margin-left: 5px;
+        padding: 7px 10px;
+    }
+    footer div span {
+        display: block;
+        text-align: center;
+    }
+    footer div span a {
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        background-repeat: no-repeat;
+        background-position: left top;
+        background-size: 35px;
+        text-indent: -9999px;
+    }
+    footer div span a:not(:first-child) {
+        margin-left: 10px;
+    }
+    footer div span a:nth-child(1) {
+        background-image: url('../images/sns_facebook.png');
+    }    
+    footer div span a:nth-child(2) {
+        background-image: url('../images/sns_instagram.png');
+    }
+    footer div span a:nth-child(3) {
+        background-image: url('../images/sns_youtube.png');
+    }
+    footer div span a:nth-child(4) {
+        background-image: url('../images/sns_kakaotalk.png');
+    }
+    footer div span a:nth-child(5) {
+        background-image: url('../images/sns_pinterest.png');
+    }
+}
+
+/* tablet */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    header {
+        padding: 40px 0;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: saturate(180%) blur(15px);
+        -webkit-backdrop-filter: saturate(180%) blur(15px);
+        -moz-backdrop-filter: saturate(180%) blur(15px);
+        -o-backdrop-filter: saturate(180%) blur(15px);
+    }
+    #show-scene-2 header,
+    #show-scene-3 header {
+        z-index: 100;
+    }
+    header h1 {
+        background: url('../images/logo.png') no-repeat center / contain;
+        line-height: 20px;
+        text-indent: -9999px;
+    }
+    header > a{
+        display: block;
+        width: 20%;
+        font-size: 13px;
+        text-align: right;
+        line-height: 30px;
+        padding-right: 25px;
+        position: absolute;
+        right: 20px;
+        top: 40px;
+        background: url('../images/icon_doubleArrow.png') no-repeat right center / 20px auto;
+    }
+    /* header */
+
+
+    footer {
+        padding: 35px 5%;
+        background-color: #fbf7f4;
+    }
+    footer:after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+    footer form fieldset,
+    footer div {
+        width: 50%;
+        float: left;
+    }
+    footer form fieldset label {
+        font-size: 15px;
+        line-height: 35px;
+    }
+    footer form fieldset input[type="email"],
+    footer form fieldset input[type="email"]::placeholder,
+    footer form fieldset input[type="submit"] {
+        font-size: 13px;
+    }
+    footer form fieldset input[type="email"] {
+        border: 1px solid #ddd;
+        background-color: transparent;
+        margin-left: 20px;
+        padding: 7px;
+        width: 35%;
+    }
+    footer form fieldset input[type="submit"] {
+        border: 1px solid #333;
+        margin-left: 5px;
+        padding: 7px 10px;
+    }
+    footer div {
+        position: relative;
+    }
+    footer div span {
+        width: 250px;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    footer div span a {
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        background-repeat: no-repeat;
+        background-position: left top;
+        background-size: 35px;
+        text-indent: -9999px;
+    }
+    footer div span a:not(:first-child) {
+        margin-left: 10px;
+    }
+    footer div span a:nth-child(1) {
+        background-image: url('../images/sns_facebook.png');
+    }    
+    footer div span a:nth-child(2) {
+        background-image: url('../images/sns_instagram.png');
+    }
+    footer div span a:nth-child(3) {
+        background-image: url('../images/sns_youtube.png');
+    }
+    footer div span a:nth-child(4) {
+        background-image: url('../images/sns_kakaotalk.png');
+    }
+    footer div span a:nth-child(5) {
+        background-image: url('../images/sns_pinterest.png');
+    }
+}
+
+
+/* PC(desktop) */
+@media screen and (min-width: 1025px)  {
+    header {
+        padding: 40px 0;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: saturate(180%) blur(15px);
+        -webkit-backdrop-filter: saturate(180%) blur(15px);
+        -moz-backdrop-filter: saturate(180%) blur(15px);
+        -o-backdrop-filter: saturate(180%) blur(15px);
+    }
+    #show-scene-2 header,
+    #show-scene-3 header {
+        z-index: 100;
+    }
+    header h1 {
+        background: url('../images/logo.png') no-repeat center / contain;
+        line-height: 30px;
+        text-indent: -9999px;
+    }
+    header > a{
+        display: block;
+        width: 20%;
+        text-align: right;
+        line-height: 30px;
+        padding-right: 25px;
+        position: absolute;
+        right: 50px;
+        top: 40px;
+        background: url('../images/icon_doubleArrow.png') no-repeat right center / 20px auto;
+    }
+    /* header */
+
+
+    footer {
+        padding: 65px 10%;
+        background-color: #fbf7f4;
+    }
+    footer:after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+    footer form fieldset,
+    footer div {
+        width: 50%;
+        float: left;
+    }
+    footer form fieldset label {
+        font-size: 20px;
+        line-height: 50px;
+    }
+    footer form fieldset input[type="email"],
+    footer form fieldset input[type="email"]::placeholder,
+    footer form fieldset input[type="submit"] {
+        font-size: 15px;
+    }
+    footer form fieldset input[type="email"] {
+        border: 1px solid #ddd;
+        background-color: transparent;
+        margin-left: 20px;
+        padding: 12px;
+        width: 35%;
+    }
+    footer form fieldset input[type="submit"] {
+        border: 1px solid #333;
+        margin-left: 5px;
+        padding: 12px 15px;
+    }
+    footer div {
+        position: relative;
+    }
+    footer div span {
+        width: 330px;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    footer div span a {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        background-repeat: no-repeat;
+        background-position: left top;
+        background-size: 50px;
+        text-indent: -9999px;
+    }
+    footer div span a:not(:first-child) {
+        margin-left: 15px;
+    }
+    footer div span a:nth-child(1) {
+        background-image: url('../images/sns_facebook.png');
+    }    
+    footer div span a:nth-child(2) {
+        background-image: url('../images/sns_instagram.png');
+    }
+    footer div span a:nth-child(3) {
+        background-image: url('../images/sns_youtube.png');
+    }
+    footer div span a:nth-child(4) {
+        background-image: url('../images/sns_kakaotalk.png');
+    }
+    footer div span a:nth-child(5) {
+        background-image: url('../images/sns_pinterest.png');
+    }
+}
