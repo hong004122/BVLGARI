@@ -150,7 +150,7 @@
         let imgElem;
         for (let i = 0; i < sceneInfo[0].values.videoImageCount; i++) {
             imgElem = new Image();
-            imgElem.src = `../images/scrollImage01/scroll${1001 + i}.jpg`;
+            imgElem.src = `../images/scroll${1001 + i}.jpg`;
             sceneInfo[0].objs.videoImages.push(imgElem);
         }
     
@@ -159,7 +159,7 @@
         let imgElem2;
         for (let i = 0; i < sceneInfo[2].values.videoImageCount; i++) {
             imgElem2 = new Image();
-            imgElem2.src = `../images/scrollImage02/scroll${3001 + i}.jpg`;
+            imgElem2.src = `../images/scroll${3001 + i}.jpg`;
             sceneInfo[2].objs.videoImages.push(imgElem2);
         
         }
