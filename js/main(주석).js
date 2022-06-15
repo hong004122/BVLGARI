@@ -155,7 +155,7 @@
         let imgElem;
         for (let i = 0; i < sceneInfo[0].values.videoImageCount; i++) {
             imgElem = new Image(); // 이미지객체 생성 (= document.createElement('img');)
-            imgElem.src = `../video/scrollImage01/scroll${1001 + i}.jpg`;
+            imgElem.src = `../images/scrollImage01/scroll${1001 + i}.jpg`;
             sceneInfo[0].objs.videoImages.push(imgElem);
             // push를 이용해 objs에 만들어 놓은 videoImages 배열에 넣어줌
         }
@@ -165,7 +165,7 @@
         let imgElem2;
         for (let i = 0; i < sceneInfo[2].values.videoImageCount; i++) {
             imgElem2 = new Image(); // 이미지객체 생성 (= document.createElement('img');)
-            imgElem2.src = `../video/scrollImage02/scroll${3001 + i}.jpg`;
+            imgElem2.src = `../images/scrollImage02/scroll${3001 + i}.jpg`;
             sceneInfo[2].objs.videoImages.push(imgElem2);
             // push를 이용해 objs에 만들어 놓은 videoImages 배열에 넣어줌
         }
