@@ -119,8 +119,8 @@
                 canvas: document.querySelector('.image-blend-canvas'),
                 context: document.querySelector('.image-blend-canvas').getContext('2d'),
                 imagesPath: [
-                    './images/blendImg01.JPG',
-                    './images/blendImg02.JPG'
+                    './images/blendImg01.jpg',
+                    './images/blendImg02.jpg'
                 ],
                 images: []
             
@@ -160,7 +160,7 @@
         let imgElem2;
         for (let i = 0; i < sceneInfo[2].values.videoImageCount; i++) {
             imgElem2 = new Image();
-            imgElem2.src = `./images/scrollImg${3001 + i}.JPG`;
+            imgElem2.src = `./images/scrollImg${3001 + i}.jpg`;
             sceneInfo[2].objs.videoImages.push(imgElem2);
         
         }
