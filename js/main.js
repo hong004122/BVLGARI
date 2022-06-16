@@ -150,7 +150,7 @@
         let imgElem;
         for (let i = 0; i < sceneInfo[0].values.videoImageCount; i++) {
             imgElem = new Image();
-            imgElem.src = `../images/scrollImg${1001 + i}.JPG`;
+            // imgElem.src = `../images/scrollImg${1001 + i}.JPG`;
             imgElem.src = `./images/scrollImg${1001 + i}.jpg`
             sceneInfo[0].objs.videoImages.push(imgElem);
         }
