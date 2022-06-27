@@ -1,5 +1,10 @@
 
 
+@media screen and (max-width: 300px) {
+    section#scroll-section-3 p.canvas-caption {
+        margin: -400px auto 0 !important;
+    }
+}
 
 /* mobile */
 @media screen and (max-width: 767px) {
