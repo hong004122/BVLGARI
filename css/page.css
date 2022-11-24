@@ -1,8 +1,8 @@
 
 
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 385px) {
     section#scroll-section-3 p.canvas-caption {
-        margin: -400px auto 0 !important;
+        margin: -330px auto 0 !important;
     }
 }
 
@@ -51,7 +51,7 @@
     }
 
     #scroll-section-0 .sticky-elem.main-message p {
-        color: #000;
+        color: rgba(0, 0, 0, 0.7);
         text-shadow: -1px -1px 0 rgba(239, 195, 162, 0.5), 1px -1px 0 rgba(239, 195, 162, 0.5), -1px 1px 0 rgba(239, 195, 162, 0.5), 1px 1px 0 rgba(239, 195, 162, 0.5);
     }
     section.normal-text {

@@ -148,14 +148,23 @@
     
     function setCanvasImages() {
         let imgElem;
-        for (let i = 0; i < sceneInfo[0].values.videoImageCount; i++) {
-            imgElem = new Image();
-            // imgElem.src = `../images/scrollImg${1001 + i}.JPG`;
-            imgElem.src = `./images/scrollImg${1001 + i}.jpg`
-            sceneInfo[0].objs.videoImages.push(imgElem);
+        const windowWidth = window.innerWidth;
+        if (windowWidth >= 500) {
+            for (let i = 0; i < sceneInfo[0].values.videoImageCount; i++) {
+                imgElem = new Image();
+                imgElem.src = `./images/scrollImg${1001 + i}.jpg`
+                sceneInfo[0].objs.videoImages.push(imgElem);
+            }
+        } else {
+            for (let i = 0; i < sceneInfo[0].values.videoImageCount; i++) {
+                imgElem = new Image();
+                // imgElem.src = `../images/scrollImg${1001 + i}.JPG`;
+                imgElem.src = `./images/mobileImg${1001 + i}.jpg`
+                sceneInfo[0].objs.videoImages.push(imgElem);
+            }
         }
     
-
+        
         
         let imgElem2;
         for (let i = 0; i < sceneInfo[2].values.videoImageCount; i++) {
@@ -478,10 +487,20 @@
             if (currentScene === 0 || currentScene === 2) {
             
                 let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
+                const windowWidth = window.innerWidth;
+                const canvasWidth = sceneInfo[0].objs.canvas.width;
+                const imgWidth = sceneInfo[0].objs.videoImages[0].width;
+                const imgDx = (canvasWidth - imgWidth) / 2;
+                const windowHeight = window.innerHeight;
+                const imgHeight = sceneInfo[0].objs.videoImages[0].height;
+                const imgDy = (imgHeight - windowHeight) / 2;
                 if (objs.videoImages[sequence]) {
-                
-                
-                    objs.context.drawImage(objs.videoImages[sequence], 0, 0);
+                    if (windowWidth < 500) {
+                        sceneInfo[0].objs.context.drawImage(objs.videoImages[sequence], imgDx,0);
+                        sceneInfo[2].objs.context.drawImage(objs.videoImages[sequence], 0, 0)
+                    } else {
+                        objs.context.drawImage(objs.videoImages[sequence], 0, 0)
+                    }
                 }
                 
             }
@@ -503,7 +522,18 @@
         document.body.classList.remove('before-load');
         setLayout();
         
-        sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
+        const windowWidth = window.innerWidth;
+        const canvasWidth = sceneInfo[0].objs.canvas.width;
+        const imgWidth = sceneInfo[0].objs.videoImages[0].width;
+        const imgDx = (canvasWidth - imgWidth) / 2;
+        const windowHeight = window.innerHeight;
+        const imgHeight = sceneInfo[0].objs.videoImages[0].height;
+        const imgDy = (imgHeight - windowHeight) / 2;
+        if (windowWidth < 500) {
+            sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], imgDx,0);
+        } else {
+            sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
+        }
         sceneInfo[2].objs.context.drawImage(sceneInfo[2].objs.videoImages[2], 0, 0);
 
         let tempYOffset = yOffset;
@@ -534,8 +564,6 @@
         
         window.addEventListener('resize', () => {
             if (window.innerWidth > 500) {
-            
-            
                 window.location.reload();
             }
         });
