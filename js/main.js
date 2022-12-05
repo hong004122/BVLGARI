@@ -580,10 +580,10 @@
         document.querySelector('.loading').addEventListener('transitionend', function() {
             this.style.display = 'none';
         });
-    
-    
-    
 
+
+
+        
     });
 
 
